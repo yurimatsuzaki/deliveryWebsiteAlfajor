@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 let orders = [
     {
@@ -10,6 +11,7 @@ let orders = [
     }
 ];
 
+app.use(cors());
 app.use(express.json());
 
 function searchId(id){
@@ -17,8 +19,7 @@ function searchId(id){
 }
 
 app.get('/orders', (req, res) => {
-    res.json(orders);
-    res.status(200);
+    res.status(200).json(orders);
 });
 
 app.post('/orders', (req, res) => {
