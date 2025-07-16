@@ -8,6 +8,13 @@ let orders = [
         "quantity": 20,
         "location": "cantina",
         "status": "pendente"
+    },
+    {
+        "id": 1,
+        "name": "Yuri",
+        "quantity": 20,
+        "location": "cantina",
+        "status": "entregue"
     }
 ];
 
@@ -15,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 function searchId(id){
-    return orders.findIndex(order => order.id == id);
+    return orders.findIndex(order => order.id === parseInt(id));
 }
 
 app.get('/orders', (req, res) => {
