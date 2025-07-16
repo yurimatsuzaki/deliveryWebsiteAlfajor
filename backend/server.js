@@ -7,6 +7,7 @@ let orders = [
         "name": "Yuri",
         "quantity": 20,
         "location": "cantina",
+        "contact":'2232323232',
         "status": "pendente"
     },
     {
@@ -14,6 +15,7 @@ let orders = [
         "name": "Yuri",
         "quantity": 20,
         "location": "cantina",
+        "contact":'212344423',
         "status": "entregue"
     }
 ];
