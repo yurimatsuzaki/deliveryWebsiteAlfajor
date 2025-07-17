@@ -23,25 +23,28 @@ async function getAllOrders() {
             divOrders.innerHTML=`<p>Não há pedidos ainda</p>`;
         }
         
-        orders.forEach(alfajor => {
-            const order = document.createElement('div');
-            order.classList.add('order');
+        orders.forEach(order => {
+            const orderDIV = document.createElement('div');
+            orderDIV.classList.add('order');
             
             const id = document.createElement('p');
-            id.textContent = `Id: ${alfajor.id}`;
+            id.textContent = `Id: ${order.id}`;
             
             const name = document.createElement('h3');
-            name.textContent = alfajor.name;
+            name.textContent = order.name;
             
             const quant = document.createElement('p');
-            quant.textContent = `Quantidade: ${alfajor.quantity}`;
+            quant.textContent = `Quantidade: ${order.quantity}`;
             
             const local = document.createElement('p');
-            local.textContent = `Local de Entrega: ${alfajor.location}`;
+            local.textContent = `Local de Entrega: ${order.location}`;
+
+            const contact = document.createElement('p');
+            contact.textContent = `Contato: ${order.contact}`;
             
             const status = document.createElement('p');
             status.classList.add('statusOrder')
-            status.textContent = `STATUS: ${alfajor.status}`;
+            status.textContent = `STATUS: ${order.status}`;
             
             const buttonStatus = document.createElement('button');
             buttonStatus.textContent = `Marcar como entregue`;
@@ -49,17 +52,18 @@ async function getAllOrders() {
             buttonStatus.setAttribute('data-order-id', order.id);
             buttonStatus.addEventListener('click', updateOrders);
             
-            order.appendChild(name);
-            order.appendChild(id);
-            order.appendChild(quant);
-            order.appendChild(local);
-            order.appendChild(status);
+            orderDIV.appendChild(name);
+            orderDIV.appendChild(id);
+            orderDIV.appendChild(quant);
+            orderDIV.appendChild(local);
+            orderDIV.appendChild(contact);
+            orderDIV.appendChild(status);
             
-            if(alfajor.status === 'pendente'){
-                order.appendChild(buttonStatus);
-                divOrders.appendChild(order);
+            if(order.status === 'pendente'){
+                orderDIV.appendChild(buttonStatus);
+                divOrders.appendChild(orderDIV);
             } else {
-                divOrdersDelivered.appendChild(order);
+                divOrdersDelivered.appendChild(orderDIV);
             }
         });
     } catch(err){

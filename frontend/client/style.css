@@ -46,7 +46,7 @@ header{
 main{
     display: flex;
     background-color: var(--color7);
-    max-width: 900px;
+    max-width: 880px;
     margin: auto;
     flex-wrap: wrap;
     justify-content: center;
@@ -193,7 +193,6 @@ form{
 }
 
 #description{
-    max-width: 93%;
     background-color: var(--color1);
     border: solid 2px var(--color6);
     border-radius: 10px;
@@ -201,6 +200,8 @@ form{
     padding: 15px;
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #description > h2{
