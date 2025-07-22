@@ -77,8 +77,6 @@ async function updateOrders(event){
         const orderId = event.target.dataset.orderId;
         const url = `${API_PUT}/${orderId}`;
 
-        console.log(orderId);
-
         const response = await fetch(url, {
             method:'PUT',
             headers:{'Content-Type':'application/json'},

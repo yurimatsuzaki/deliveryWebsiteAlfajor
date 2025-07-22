@@ -1,27 +1,27 @@
 API_POST = 'http://localhost:3000/orders';
 const buttonOrder = document.getElementById('buttonOrder');
 
-let id = 0
+function generateIdUnique(){
+    return Math.random().toString(6);
+}
 
 async function postOrders() {
+    const newId = generateIdUnique();
     try{
-        const idIncrement = id+=1;
         const clientName = document.getElementById('nameClient').value;
         const clientQuant = document.getElementById('quantClient').value;
         const clientDelivery = document.getElementById('localClient').value;
         const clientContact = document.getElementById('contactClient').value;
 
-        console.log(idIncrement, clientName,clientQuant,clientDelivery,clientContact)
-
         const response = await fetch(API_POST, {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
-                "id": idIncrement,
+                "id": newId,
                 "name": clientName,
                 "quantity": clientQuant,
                 "location": clientDelivery,
-                "Contato": clientContact,
+                "contact": clientContact,
                 "status": "pendente"
             })
         });
