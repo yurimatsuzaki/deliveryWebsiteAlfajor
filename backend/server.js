@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+let nextId = 1
 let orders = [
     {
-        "id": 0,
+        "id": -1,
         "name": "Yuri",
         "quantity": 20,
         "location": "cantina",
@@ -11,7 +12,7 @@ let orders = [
         "status": "pendente"
     },
     {
-        "id": 1,
+        "id": 0,
         "name": "Yuri",
         "quantity": 20,
         "location": "cantina",
@@ -33,7 +34,15 @@ app.get('/orders', (req, res) => {
 
 app.post('/orders', (req, res) => {
     const order = req.body;
-    orders.push(order);
+    const newOrder = {
+        "id": nextId++,
+        "name": order.name,
+        "quantity": order.quantity,
+        "location": order.location,
+        "contact":order.contact,
+        "status": "pendente"
+    }
+    orders.push(newOrder);
     res.status(201).json({
         message: "Pedido realizado com sucesso!"
     });

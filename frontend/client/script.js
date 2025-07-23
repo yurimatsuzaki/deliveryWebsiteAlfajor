@@ -1,12 +1,7 @@
 API_POST = 'http://localhost:3000/orders';
 const buttonOrder = document.getElementById('buttonOrder');
 
-function generateIdUnique(){
-    return Math.random().toString(6);
-}
-
 async function postOrders() {
-    const newId = generateIdUnique();
     try{
         const clientName = document.getElementById('nameClient').value;
         const clientQuant = document.getElementById('quantClient').value;
@@ -17,12 +12,10 @@ async function postOrders() {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({
-                "id": newId,
                 "name": clientName,
                 "quantity": clientQuant,
                 "location": clientDelivery,
                 "contact": clientContact,
-                "status": "pendente"
             })
         });
 
@@ -38,4 +31,4 @@ async function postOrders() {
     }
 }
 
-buttonOrder.addEventListener('click', postOrders);
+buttonOrder.addEventListener('click', postOrders)
