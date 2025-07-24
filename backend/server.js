@@ -33,13 +33,12 @@ app.get('/orders', (req, res) => {
 });
 
 app.post('/orders', (req, res) => {
-    const order = req.body;
     const newOrder = {
         "id": nextId++,
-        "name": order.name,
-        "quantity": order.quantity,
-        "location": order.location,
-        "contact":order.contact,
+        "name": req.body.name,
+        "quantity": req.body.quantity,
+        "location": req.body.location,
+        "contact":req.body.contact,
         "status": "pendente"
     }
     orders.push(newOrder);
