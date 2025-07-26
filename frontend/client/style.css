@@ -265,3 +265,37 @@ footer > p{
     margin-top: 10px;
     font-size: 0.9em;
 }
+
+dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    border: solid 1px var(--color2);
+    border-radius: 10px;
+    background-color: var(--color4);
+    color: var(--color1);
+}
+
+dialog > p{
+    margin-top: 2px;
+}
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#buttonMessage{
+    width: 100px;
+    text-align: center;
+    display: block;
+    margin: 20px auto 0px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--color7);
+    color: var(--color2);
+}

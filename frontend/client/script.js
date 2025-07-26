@@ -3,6 +3,8 @@ const buttonOrder = document.getElementById('buttonOrder');
 
 async function postOrders() {
     try{
+        const messageClientOrder = document.getElementById('messageClientOrder');
+        const buttonMessage = document.getElementById('buttonMessage');
         const clientName = document.getElementById('nameClient').value.trim();
         const clientQuant = document.getElementById('quantClient').value.trim();
         const clientDelivery = document.getElementById('localClient').value.trim();
@@ -21,12 +23,17 @@ async function postOrders() {
                     "contact": clientContact,
                 })
             });
+            
+            messageClientOrder.showModal();
+            buttonMessage.addEventListener('click', () => {
+                messageClientOrder.close();
+                window.location.reload();
+            })
 
             if(!response.ok){
                 const errorData = await response.json();
                 throw new Error(`Erro na rede: ${response.status} - ${errorData.message || response.statusText}`);
             }
-            buttonOrder.href = 'orderPlaced.html'
         }
     } catch(err){
         console.error('Erro ao tentar fazer pedido: ', err.message);

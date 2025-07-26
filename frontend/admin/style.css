@@ -85,6 +85,10 @@ main{
     width: 100%;
 }
 
+#ordersDelivered{
+    width: 100%;
+}
+
 .order{
     width: 90%;
     padding: 15px;
