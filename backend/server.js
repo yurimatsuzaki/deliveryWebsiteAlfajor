@@ -1,25 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-let nextId = 1
-let orders = [
-    {
-        "id": -1,
-        "name": "Yuri",
-        "quantity": 20,
-        "location": "cantina",
-        "contact":'2232323232',
-        "status": "pendente"
-    },
-    {
-        "id": 0,
-        "name": "Yuri",
-        "quantity": 20,
-        "location": "cantina",
-        "contact":'212344423',
-        "status": "entregue"
-    }
-];
+
+let quantityAlfajor = 30;
+let nextId = 1;
+let orders = [];
 
 app.use(cors());
 app.use(express.json());
@@ -46,6 +31,7 @@ app.post('/orders', (req, res) => {
         "status": "pendente"
     }
     orders.push(newOrder);
+    quantityAlfajor--;
     res.status(201).json({
         message: "Pedido realizado com sucesso!"
     });
