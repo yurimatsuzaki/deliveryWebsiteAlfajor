@@ -267,6 +267,9 @@ footer > p{
 }
 
 dialog{
+    min-width: 250px;
+    max-width: 300px;
+    display: block;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -284,6 +287,47 @@ dialog > p{
 
 dialog::backdrop{
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.orderPlacedMessage{
+    margin-bottom: 20px;
+}
+
+#orderPlaced > h2{
+    font-size: 2em;
+}
+
+#paymentOrder > h2{
+    margin-bottom: 8px;
+}
+
+#paymentOrder > p{
+    font-weight: 700;
+}
+
+#paymentOrder > p > span{
+    font-weight: 350;
+}
+
+#paymentOrder > button{
+    width: 100px;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--color7);
+    color: var(--color2);
+}
+
+#imgQrCodePayment{
+    margin-bottom: 40px;
+}
+
+#imgQrCodePayment > img{
+    width: 100%;
 }
 
 #buttonMessage{

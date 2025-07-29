@@ -24,6 +24,10 @@ let orders = [
 app.use(cors());
 app.use(express.json());
 
+app.get('/saude', (req, res) => {
+    res.status(200).send('OK');
+});
+
 function searchId(id){
     return orders.findIndex(order => order.id === parseInt(id));
 }

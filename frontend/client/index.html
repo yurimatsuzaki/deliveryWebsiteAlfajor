@@ -90,8 +90,21 @@
     </footer>
 
     <dialog id="messageClientOrder">
-        <h2>Pedido Feito!</h2>
-        <p>Agora é só aguardar que irei lhe entregar</p>
+        <section id="orderPlaced" class="orderPlacedMessage">
+            <h2>Pedido Feito!</h2>
+            <p>Agora é só aguardar que irei lhe entregar</p>
+        </section>
+
+        <section id="paymentOrder" class="orderPlacedMessage">
+            <h2>Vai pagar com pix?</h2>
+            <p>CHAVE: <span>796dae97-126e-4490-ac88-ce6b4e4a8677</span></p>
+            <button id="buttonCopy">Copiar</button>
+        </section>
+
+        <section id="imgQrCodePayment" class="orderPlacedMessage">
+            <img src="images/qrcode-pix.jpg" alt="código para pagamento com pix">
+        </section>
+
         <button id="buttonMessage">Certo!</button>
     </dialog>
 

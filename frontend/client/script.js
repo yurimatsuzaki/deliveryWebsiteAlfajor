@@ -1,10 +1,15 @@
 API_POST = 'http://localhost:3000/orders';
 const buttonOrder = document.getElementById('buttonOrder');
+const buttonCopyText = document.getElementById('buttonCopy');
+const messageClientOrder = document.getElementById('messageClientOrder');
+const buttonMessage = document.getElementById('buttonMessage');
+
+function copyText(text){
+    
+}
 
 async function postOrders() {
     try{
-        const messageClientOrder = document.getElementById('messageClientOrder');
-        const buttonMessage = document.getElementById('buttonMessage');
         const clientName = document.getElementById('nameClient').value.trim();
         const clientQuant = document.getElementById('quantClient').value.trim();
         const clientDelivery = document.getElementById('localClient').value.trim();
@@ -24,6 +29,8 @@ async function postOrders() {
                 })
             });
             
+
+
             messageClientOrder.showModal();
             buttonMessage.addEventListener('click', () => {
                 messageClientOrder.close();
