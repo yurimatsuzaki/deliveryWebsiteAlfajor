@@ -14,7 +14,8 @@ async function getAllOrders() {
             throw new Error(`Erro na rede: ${response.status} - ${response.statusText}`);
         }
         
-        const orders = await response.json();
+        const data = await response.json();
+        const orders = data.orders;
         
         divOrders.innerHTML=''
         divOrdersDelivered.innerHTML=''

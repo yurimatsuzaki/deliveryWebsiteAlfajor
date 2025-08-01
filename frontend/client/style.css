@@ -246,6 +246,17 @@ form{
     font-size: 0.9em;
 }
 
+#totalQuantity{
+    margin-top: 50px;
+    color: var(--color2);
+}
+
+#totalQuantity > p{
+    font-size: 2em;
+    color: var(--color3);
+    font-weight: 700;
+}
+
 footer{
     background-color: var(--color2);
     height: 150px;

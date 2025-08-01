@@ -18,7 +18,10 @@ function searchId(id){
 }
 
 app.get('/orders', (req, res) => {
-    res.status(200).json(orders);
+    res.status(200).json({
+        orders,
+        quantityAlfajor
+    });
 });
 
 app.post('/orders', (req, res) => {
@@ -30,8 +33,12 @@ app.post('/orders', (req, res) => {
         "contact":req.body.contact,
         "status": "pendente"
     }
-    orders.push(newOrder);
-    quantityAlfajor--;
+
+    if(Number(req.body.quantity) <= quantityAlfajor){
+        orders.push(newOrder);
+        quantityAlfajor = quantityAlfajor - Number(req.body.quantity);
+    }
+
     res.status(201).json({
         message: "Pedido realizado com sucesso!"
     });
