@@ -37,6 +37,7 @@ async function postOrders() {
         const clientDelivery = document.getElementById('localClient').value.trim();
         const clientContact = document.getElementById('contactClient').value.trim();
         const totalQuantity = document.getElementById('total').textContent.trim();
+        const totalPrice = document.getElementById('totalPriceDisplay')
 
         if(clientName.length == 0 || clientQuant.length == 0 || clientDelivery.length == 0 || clientContact.length == 0){
             alert('Preencha TODOS os campos abixo!');
@@ -61,6 +62,8 @@ async function postOrders() {
                 buttonCopyText.innerHTML='Copiado!'
             })
 
+            totalPrice.innerHTML=`R$ ${Number(clientQuant) * 3}`
+
             messageClientOrder.showModal();
             buttonMessage.addEventListener('click', () => {
                 messageClientOrder.close();
@@ -79,5 +82,5 @@ async function postOrders() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', totalQuantity);
 buttonOrder.addEventListener('click', postOrders)
+document.addEventListener('DOMContentLoaded', totalQuantity);
