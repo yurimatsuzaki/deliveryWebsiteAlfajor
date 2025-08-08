@@ -11,7 +11,7 @@ const client = new Client({
 async function connectToDb() {
     try{
         await client.connect();
-        console.log("Conexão bem sucedida!!");
+        console.log("Conexão com o banco bem sucedida!!");
     } catch (err){
         console.error("Erro ao conectar com o banco: ", err.message)
     }

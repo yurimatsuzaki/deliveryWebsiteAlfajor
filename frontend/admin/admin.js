@@ -1,5 +1,4 @@
-API_GET = 'http://localhost:3000/orders';
-API_PUT = 'http://localhost:3000/orders';
+API_URL = 'http://localhost:3000/orders';
 
 async function getAllOrders() {
     const divOrders = document.getElementById('pendingOrders');
@@ -8,7 +7,7 @@ async function getAllOrders() {
     divOrdersDelivered.innerHTML='Não há pedidos entregues...';
     
     try{
-        const response = await fetch(API_GET);
+        const response = await fetch(API_URL);
         
         if(!response.ok){
             throw new Error(`Erro na rede: ${response.status} - ${response.statusText}`);
@@ -53,6 +52,12 @@ async function getAllOrders() {
             buttonStatus.setAttribute('data-order-id', order.id);
             buttonStatus.addEventListener('click', updateOrders);
             
+            const buttonDelete = document.createElement('button');
+            buttonDelete.textContent = 'Deletar';
+            buttonDelete.classList.add('buttonDelete');
+            buttonDelete.setAttribute('data-order-id', order.id);
+            buttonDelete.addEventListener('click', deleteOrders);
+            
             orderDIV.appendChild(name);
             orderDIV.appendChild(id);
             orderDIV.appendChild(quant);
@@ -64,6 +69,7 @@ async function getAllOrders() {
                 orderDIV.appendChild(buttonStatus);
                 divOrders.appendChild(orderDIV);
             } else {
+                orderDIV.appendChild(buttonDelete)
                 divOrdersDelivered.appendChild(orderDIV);
             }
         });
@@ -76,7 +82,7 @@ async function getAllOrders() {
 async function updateOrders(event){
     try{
         const orderId = event.target.dataset.orderId;
-        const url = `${API_PUT}/${orderId}`;
+        const url = `${API_URL}/${orderId}`;
 
         const response = await fetch(url, {
             method:'PUT',
@@ -91,8 +97,28 @@ async function updateOrders(event){
 
         getAllOrders();
     } catch(err){
-        console.error('Erro ao carregar os pedidos entregues: ', err.message)
-        divOrders.innerHTML = '<p style="color: red;">Não foi possível carregar os alfajores no momento. Tente novamente mais tarde.</p>';
+        console.error('Erro ao atualizar o status dos pedidos: ', err);
+    }
+}
+
+async function deleteOrders(event) {
+    try{
+        const orderId = event.target.dataset.orderId;
+        const url = `${API_URL}/${orderId}`;
+
+        const response = await fetch(url, {
+            method:'DELETE',
+            headers:{'Content-Type':'application/json'}
+        });
+        
+        if(!response.ok){
+            const errorData = await response.json();
+            throw new Error(`Erro na rede: ${response.status} - ${errorData.message || response.statusText}`);
+        }
+
+        getAllOrders();
+    } catch(err){
+        console.error('Erro ao deletar os pedidos entregues: ', err.message);
     }
 }
 

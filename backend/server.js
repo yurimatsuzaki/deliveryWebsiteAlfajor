@@ -15,11 +15,16 @@ app.get('/saude', (req, res) => {
 });
 
 app.get('/orders', async (req, res) => {
-    const result = await client.query('SELECT * FROM orders ORDER BY id;');
-    res.status(200).json({
-        result,
-        quantityAlfajor
-    });
+    try{
+        const result = await client.query('SELECT * FROM orders ORDER BY id;');
+        res.status(200).json({
+            result,
+            quantityAlfajor
+        });
+    } catch(err) {
+        console.error("Erro ao exibir os pedidos: ", err.message);
+        res.status(404).json()
+    }
 });
 
 app.post('/orders', async (req, res) => {
@@ -35,17 +40,28 @@ app.post('/orders', async (req, res) => {
     }
 })
 
-app.put('/orders/:id', (req,res) => {
+app.put('/orders/:id', async (req,res) => {
     try{
         let id = req.params.id;
         const newStatus = req.body.status;
-        const result = client.query('UPDATE orders SET status = $1 WHERE id = $2 RETURNING *', [newStatus, id]);
+        const result = await client.query('UPDATE orders SET status = $1 WHERE id = $2 RETURNING *', [newStatus, id]);
         res.status(202).json(result);
     } catch(err){
         console.error("Erro ao tentar atualizar pedido: ", err.message);
         res.status(401).json();
     }
 });
+
+app.delete('/orders/:id', async (req,res) => {
+    try{
+        let id = req.params.id;
+        const result = await client.query('DELETE FROM orders WHERE id = $1  RETURNING *', [id]);
+        res.status(202).json(result);
+    } catch(err){
+        console.error("Erro ao tentar excluir pedido: ", err.message);
+        res.status(401).json();
+    }
+})
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor rodando com sucesso!');
