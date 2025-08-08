@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const client = require('./db');
 
 let quantityAlfajor = 30;
-let nextId = 1;
-let orders = [];
+let nextId = 5;
 
 app.use(cors());
 app.use(express.json());
@@ -13,41 +14,37 @@ app.get('/saude', (req, res) => {
     res.status(200).send('OK');
 });
 
-function searchId(id){
-    return orders.findIndex(order => order.id === parseInt(id));
-}
-
-app.get('/orders', (req, res) => {
+app.get('/orders', async (req, res) => {
+    const result = await client.query('SELECT * FROM orders ORDER BY id;');
     res.status(200).json({
-        orders,
+        result,
         quantityAlfajor
     });
 });
 
-app.post('/orders', (req, res) => {
-    const newOrder = {
-        "id": nextId++,
-        "name": req.body.name,
-        "quantity": req.body.quantity,
-        "location": req.body.location,
-        "contact":req.body.contact,
-        "status": "pendente"
+app.post('/orders', async (req, res) => {
+    try{
+        if(Number(req.body.quantity) <= quantityAlfajor){
+            const result = await client.query('INSERT INTO orders (id,name,quantity,location,contact,status) values ($1,$2,$3,$4,$5,$6) RETURNING *', [nextId++, req.body.name,req.body.quantity,req.body.location,req.body.contact,"pendente"]);
+            quantityAlfajor = quantityAlfajor - Number(req.body.quantity);
+            res.status(201).json(result.rows[0]);
+        }
+    } catch(err){
+        console.error("Erro ao tentar realizar o pedido: ", err.message);
+        res.status(400).json();
     }
-
-    if(Number(req.body.quantity) <= quantityAlfajor){
-        orders.push(newOrder);
-        quantityAlfajor = quantityAlfajor - Number(req.body.quantity);
-    }
-
-    res.status(201).json({
-        message: "Pedido realizado com sucesso!"
-    });
 })
 
 app.put('/orders/:id', (req,res) => {
-    let id = searchId(req.params.id);
-    orders[id].status = req.body.status;
-    res.json(orders);
+    try{
+        let id = req.params.id;
+        const newStatus = req.body.status;
+        const result = client.query('UPDATE orders SET status = $1 WHERE id = $2 RETURNING *', [newStatus, id]);
+        res.status(202).json(result);
+    } catch(err){
+        console.error("Erro ao tentar atualizar pedido: ", err.message);
+        res.status(401).json();
+    }
 });
 
 app.listen(process.env.PORT, () => {

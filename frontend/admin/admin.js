@@ -15,7 +15,7 @@ async function getAllOrders() {
         }
         
         const data = await response.json();
-        const orders = data.orders;
+        const orders = data.result.rows;
         
         divOrders.innerHTML=''
         divOrdersDelivered.innerHTML=''
