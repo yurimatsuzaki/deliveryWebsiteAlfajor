@@ -52,6 +52,12 @@ main{
     justify-content: center;
 }
 
+#sectionOrders{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .ordersBox{
     border: solid 2px var(--color6);
     background-color: var(--color1);
@@ -63,21 +69,21 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px 20px;
+    margin: 25px 10px;
 }
 
-.headerOrder{
+.headerAll{
     margin-bottom: 30px;
     padding: 5px;
     text-align: left;
 }
 
-.headerOrder > h2{
+.headerAll > h2{
     color: var(--color2);
     font-size: 1.8em;
 }
 
-.headerOrder > p{
+.headerAll > p{
     color: #444444;
 }
 
@@ -148,4 +154,71 @@ main{
 .buttonDelete:hover{
     background-color: var(--color6);
     transform: scale(1.05);
+}
+
+#quantityTotal{
+    border: solid 2px var(--color6);
+    background-color: var(--color1);
+    border-radius: 10px;
+    min-height: 250px;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 40px 50px;
+}
+
+#quantityTotal > div{
+    margin-bottom: 20px;
+}
+
+#insertQuantity{
+    margin: auto;
+}
+
+#quantityInput{
+    max-width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 2px var(--color6);
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+#buttons{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: auto;
+}
+
+.buttons{
+    height: 50px;
+    width: 180px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.01em;
+    font-weight: 500;
+    border: none;
+    color: var(--color1);
+    margin: 10px;
+    transition: 200ms;
+}
+
+.buttons:hover{
+    transform: scale(1.06);
+}
+
+#buttonDefine{
+    background-color: blue;
+}
+
+#buttonAdd{
+    background-color: green;
+}
+
+#buttonDel{
+    background-color: red;
 }

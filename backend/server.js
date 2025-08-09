@@ -5,7 +5,7 @@ const app = express();
 const client = require('./db');
 
 let quantityAlfajor = 30;
-let nextId = 5;
+let nextId = 1;
 
 app.use(cors());
 app.use(express.json());
