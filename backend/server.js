@@ -4,7 +4,6 @@ const cors = require('cors');
 const app = express();
 const client = require('./db');
 
-let quantityAlfajor = 30;
 let nextId = 1;
 
 app.use(cors());
@@ -23,7 +22,17 @@ app.get('/orders', async (req, res) => {
         });
     } catch(err) {
         console.error("Erro ao exibir os pedidos: ", err.message);
-        res.status(404).json()
+        res.status(404).json();
+    }
+});
+
+app.get('/quantity', async (req,res) => {
+    try{
+        const result = await client.query('SELECT quantityproduct FROM product;');
+        res.status(200).json(result);
+    } catch(err) {
+        console.error("Erro ao carregar as qauntidades de alfajor: ", err.message);
+        res.status(404).json();
     }
 });
 
@@ -39,6 +48,28 @@ app.post('/orders', async (req, res) => {
         res.status(400).json();
     }
 })
+
+app.post('/quantity', async (req, res) => {
+    try{
+        const result = await client.query('INSERT INTO product (quantityproduct) values ($1) RETURNING *', [req.body.quantityproduct]);
+        res.status(201).json(result.rows[0]);
+    } catch(err){
+        console.error("Erro ao tentar atualizar a quantidade de alfajor: ", err.message);
+        res.status(400).json();
+    }
+})
+
+app.put('/orders/:id', async (req,res) => {
+    try{
+        let id = req.params.id;
+        const newStatus = req.body.status;
+        const result = await client.query('UPDATE orders SET status = $1 WHERE id = $2 RETURNING *', [newStatus, id]);
+        res.status(202).json(result);
+    } catch(err){
+        console.error("Erro ao tentar atualizar pedido: ", err.message);
+        res.status(401).json();
+    }
+});
 
 app.put('/orders/:id', async (req,res) => {
     try{
