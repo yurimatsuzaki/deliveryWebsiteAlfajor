@@ -1,28 +1,30 @@
 API_POST = 'http://localhost:3000/orders';
 API_GET = 'http://localhost:3000/orders';
+API_GET_QUANTITY = 'http://localhost:3000/quantity';
 
 const buttonOrder = document.getElementById('buttonOrder');
 const buttonCopyText = document.getElementById('buttonCopy');
 const messageClientOrder = document.getElementById('messageClientOrder');
 const buttonMessage = document.getElementById('buttonMessage');
 
-async function totalQuantity() {
+async function getQuantityProduct() {
     const totalQuantity = document.getElementById('totalQuantity');
-
     try{
-        const response = await fetch(API_GET);
-        
-        if(!response.ok){
-            throw new Error(`Erro na rede: ${response.status} - ${response.statusText}`);
-        }
-        
-        const quantity = await response.json();
+        const response = await fetch(API_GET_QUANTITY);
 
-        totalQuantity.innerHTML=`<h3>Total de Alfajores restantes:</h3>
-                                <p id="total">${quantity.quantityAlfajor}</p>`;
+        if(!response.ok){
+            const errorData = await response.json();
+            throw new Error(`Erro na rede: ${response.status} - ${errorData.message || response.statusText}`);
+        }
+
+        const responseData = await response.json();
+
+        responseData.forEach(quant => {
+            totalQuantity.innerHTML=`<h3>Total de Alfajores restantes:</h3>
+            <p id="total">${quant.quantityproduct}</p>`;
+        });
     } catch(err){
-        console.error('Erro ao carregar as quantidades: ', err.message)
-        divOrders.innerHTML = '<p style="color: red;">Não foi possível carregar as quantidades de alfajor no momento. Tente novamente mais tarde.</p>';
+        console.error('Erro ao exibir a quantidade dos alfajores: ', err.message);
     }
 }
 
@@ -83,4 +85,4 @@ async function postOrders() {
 }
 
 buttonOrder.addEventListener('click', postOrders)
-document.addEventListener('DOMContentLoaded', totalQuantity);
+document.addEventListener('DOMContentLoaded', getQuantityProduct);

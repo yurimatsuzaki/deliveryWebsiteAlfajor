@@ -52,6 +52,33 @@ main{
     justify-content: center;
 }
 
+#displayQuantity{
+    border: solid 2px var(--color6);
+    background-color: var(--color1);
+    border-radius: 10px;
+    min-height: 130px;
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin: 25px 40px 0px;
+}
+
+#displayQuantity > h2{
+    color: var(--color2);
+    text-align: center;
+}
+
+#displayQuantityNumber{
+    margin: 20px 0px 10px;
+    text-align: center;
+    color: var(--color3);
+    font-size: 2em;
+    font-weight: 600;
+}
+
 #sectionOrders{
     display: flex;
     flex-wrap: wrap;
