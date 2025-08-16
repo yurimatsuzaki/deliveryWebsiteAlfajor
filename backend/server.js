@@ -28,18 +28,15 @@ app.get('/quantity', async (req,res) => {
         const result = await client.query('SELECT quantityproduct FROM product;');
         res.status(200).json(result.rows);
     } catch(err) {
-        console.error("Erro ao carregar as qauntidades de alfajor: ", err.message);
+        console.error("Erro ao carregar as quantidades de alfajor: ", err.message);
         res.status(500).json();
     }
 });
 
 app.post('/orders', async (req, res) => {
     try{
-        if(Number(req.body.quantity) <= quantityAlfajor){
-            const result = await client.query('INSERT INTO orders (id,name,quantity,location,contact,status) values ($1,$2,$3,$4,$5,$6) RETURNING *', [nextId++, req.body.name,req.body.quantity,req.body.location,req.body.contact,"pendente"]);
-            quantityAlfajor = quantityAlfajor - Number(req.body.quantity);
-            res.status(201).json(result.rows[0]);
-        }
+        const result = await client.query('INSERT INTO orders (name,quantity,location,contact,status) values ($1,$2,$3,$4,$5) RETURNING *', [req.body.name,req.body.quantity,req.body.location,req.body.contact,"pendente"]);
+        res.status(201).json(result.rows[0]);
     } catch(err){
         console.error("Erro ao tentar realizar o pedido: ", err.message);
         res.status(500).json();
