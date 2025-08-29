@@ -1,4 +1,4 @@
-import { getQuantityProduct } from "../services/api.js";
+import { getQuantityProduct } from "../services/apiClient.js";
 
 export async function displayQuantityProducts(){
     const totalQuantity = document.getElementById('totalQuantity');
