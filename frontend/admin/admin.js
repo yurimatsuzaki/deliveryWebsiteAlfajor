@@ -1,10 +1,5 @@
-import { getQuantityProduct } from "./services/apiAdmin";
-import { updateQuantiy } from "./services/apiAdmin";
-import { sumQuantiy } from "./services/apiAdmin";
-import { removeQuantiy } from "./services/apiAdmin";
-import { displayOrders } from "./ui/interfaceAdmin";
-
-API_URL = 'http://localhost:3000/orders';
+import { getQuantityProduct, updateQuantiy, sumQuantiy, removeQuantiy } from "./services/apiAdmin";
+import { displayOrders } from "./ui/interfaceAdmin.js";
 
 const btnDefineQuant = document.getElementById('buttonDefine');
 const btnSumQuant = document.getElementById('buttonAdd');

@@ -1,6 +1,4 @@
-import { updateOrders } from "./services/api";
-import { deleteOrders } from "./services/api";
-import { getAllOrders } from "../services/apiAdmin";
+import { updateOrders, getAllOrders, deleteOrders } from "../services/apiAdmin.js";
 
 export async function displayOrders() {
     const divOrders = document.getElementById('pendingOrders');
@@ -25,7 +23,7 @@ export async function displayOrders() {
         id.textContent = `Id: ${order.id}`;
         
         const name = document.createElement('h3');
-        name.textContent = order.name;
+        name.textContent = `Cliente: ${order.name}`;
         
         const quant = document.createElement('p');
         quant.textContent = `Quantidade: ${order.quantity}`;
