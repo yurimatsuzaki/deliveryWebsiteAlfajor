@@ -4,8 +4,6 @@ const cors = require('cors');
 const app = express();
 const client = require('./db');
 
-let nextId = 1;
-
 app.use(cors());
 app.use(express.json());
 
