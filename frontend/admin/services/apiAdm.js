@@ -1,9 +1,10 @@
-import { displayOrders } from "../ui/interfaceAdmin";
-API_URL = 'http://localhost:3000/orders';
-API_GET_QUANTITY = 'http://localhost:3000/quantity';
-API_DEFINE_QUANTITY = 'http://localhost:3000/quantity/set';
-API_ADD_QUANTITY = 'http://localhost:3000/quantity/update';
-API_REMOVE_QUANTITY = 'http://localhost:3000/quantity/delete';
+import { displayAllOrders } from "../ui/interfaceAdm.js";
+
+const API_URL = 'http://localhost:3000/orders';
+const API_GET_QUANTITY = 'http://localhost:3000/quantity';
+const API_DEFINE_QUANTITY = 'http://localhost:3000/quantity/set';
+const API_ADD_QUANTITY = 'http://localhost:3000/quantity/update';
+const API_REMOVE_QUANTITY = 'http://localhost:3000/quantity/delete';
 
 export async function getAllOrders() {
     try{
@@ -14,7 +15,7 @@ export async function getAllOrders() {
         }
 
         const responseData = await response.json();
-        return responseData;
+        return responseData
     } catch(err){
         console.error('Erro ao carregar os pedidos: ', err.message);
         divOrders.innerHTML = '<p style="color: red;">Não foi possível carregar os alfajores no momento. Tente novamente mais tarde.</p>';
@@ -37,7 +38,7 @@ export async function updateOrders(event){
             throw new Error(`Erro na rede: ${response.status} - ${errorData.message || response.statusText}`);
         }
 
-        displayOrders();
+        displayAllOrders();
     } catch(err){
         console.error('Erro ao atualizar o status dos pedidos: ', err.message);
     }
@@ -58,15 +59,15 @@ export async function deleteOrders(event) {
             throw new Error(`Erro na rede: ${response.status} - ${errorData.message || response.statusText}`);
         }
 
-        displayOrders();
+        displayAllOrders();
     } catch(err){
         console.error('Erro ao deletar os pedidos entregues: ', err.message);
     }
 }
 
 export async function getQuantityProduct() {
+    const displayQuantityNumber = document.getElementById('displayQuantityNumber');
     try{
-        const displayQuantityNumber = document.getElementById('displayQuantityNumber');
         const response = await fetch(API_GET_QUANTITY);
 
         if(!response.ok){

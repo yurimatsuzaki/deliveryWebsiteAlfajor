@@ -1,20 +1,20 @@
-import { updateOrders, getAllOrders, deleteOrders } from "../services/apiAdmin.js";
+import { updateOrders, deleteOrders, getAllOrders } from "../services/apiAdm.js";
 
-export async function displayOrders() {
+export async function displayAllOrders() {
     const divOrders = document.getElementById('pendingOrders');
     divOrders.innerHTML='Carregando os pedidos...';
     const divOrdersDelivered = document.getElementById('ordersDelivered');
-    divOrdersDelivered.innerHTML='Não há pedidos entregues...';
-
-    divOrders.innerHTML=''
-    divOrdersDelivered.innerHTML=''
-
-    const responseData = await getAllOrders(); 
     
+    const responseData = await getAllOrders();
+
+    divOrders.innerHTML='';
+    divOrdersDelivered.innerHTML='';
+
     if(responseData.length === 0){
         divOrders.innerHTML=`<p>Não há pedidos ainda</p>`;
+        divOrdersDelivered.innerHTML='Não há pedidos entregues...';
     }
-    
+
     responseData.forEach(order => {
         const orderDIV = document.createElement('div');
         orderDIV.classList.add('order');
@@ -23,14 +23,14 @@ export async function displayOrders() {
         id.textContent = `Id: ${order.id}`;
         
         const name = document.createElement('h3');
-        name.textContent = `Cliente: ${order.name}`;
+        name.textContent = order.name;
         
         const quant = document.createElement('p');
         quant.textContent = `Quantidade: ${order.quantity}`;
         
         const local = document.createElement('p');
         local.textContent = `Local de Entrega: ${order.location}`;
-
+    
         const contact = document.createElement('p');
         contact.textContent = `Contato: ${order.contact}`;
         
@@ -49,7 +49,7 @@ export async function displayOrders() {
         buttonDelete.classList.add('buttonDelete');
         buttonDelete.setAttribute('data-order-id', order.id);
         buttonDelete.addEventListener('click', deleteOrders);
-
+    
         orderDIV.appendChild(name);
         orderDIV.appendChild(id);
         orderDIV.appendChild(quant);
