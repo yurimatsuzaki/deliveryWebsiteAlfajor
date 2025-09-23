@@ -9,10 +9,10 @@ export async function displayAllOrders() {
 
     divOrders.innerHTML='';
     divOrdersDelivered.innerHTML='';
-
+    
     if(responseData.length === 0){
-        divOrders.innerHTML=`<p>Não há pedidos ainda</p>`;
-        divOrdersDelivered.innerHTML='Não há pedidos entregues...';
+        divOrders.innerHTML=`<p style="margin-left: 20px"> Não há pedidos ainda</p>`;
+        divOrdersDelivered.innerHTML='<p style="margin-left: 20px"> Não há pedidos entregues...</p>';
     }
 
     responseData.forEach(order => {

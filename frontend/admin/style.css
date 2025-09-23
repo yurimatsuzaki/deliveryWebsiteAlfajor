@@ -23,8 +23,8 @@ body{
 header{
     background-color: var(--color1);
     text-align: center;
-    padding: 20px;
-    min-height: 150px;
+    padding: 15px;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,21 +88,23 @@ main{
 .ordersBox{
     border: solid 2px var(--color6);
     background-color: var(--color1);
-    border-radius: 10px;
+    border-radius: 8px;
     min-height: 520px;
     max-width: 400px;
     box-sizing: border-box;
-    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 25px 10px;
+    margin: 15px 10px;
 }
 
 .headerAll{
     margin-bottom: 30px;
-    padding: 5px;
+    padding: 15px;
     text-align: left;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-sizing: border-box;
 }
 
 .headerAll > h2{
@@ -190,7 +192,7 @@ main{
     min-height: 250px;
     flex-grow: 1;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     margin: 0px 40px 50px;
@@ -232,6 +234,17 @@ main{
     color: var(--color1);
     margin: 10px;
     transition: 200ms;
+}
+
+.buttons::after{
+    content: "";
+    display: block;
+    padding: 2px;
+    width: 90%;
+    border-radius: 5px;
+    margin: auto;
+    background-color: var(--color1);
+    transition: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .buttons:hover{
