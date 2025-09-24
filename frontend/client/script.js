@@ -1,5 +1,5 @@
-import { postOrders } from './services/api.js';
-import { displayQuantityProducts } from './ui/interface.js';
+import { postOrders } from './services/apiClient.js';
+import { displayQuantityProducts } from './ui/interfaceClient.js';
 
 const buttonOrder = document.getElementById('buttonOrder');
 const buttonCopyText = document.getElementById('buttonCopy');

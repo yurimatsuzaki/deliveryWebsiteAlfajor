@@ -236,7 +236,7 @@ main{
     transition: 200ms;
 }
 
-.buttons::after{
+/*.buttons::after{
     content: "";
     display: block;
     padding: 2px;
@@ -245,7 +245,7 @@ main{
     margin: auto;
     background-color: var(--color1);
     transition: cubic-bezier(0.645, 0.045, 0.355, 1);
-}
+}*/
 
 .buttons:hover{
     transform: scale(1.06);
