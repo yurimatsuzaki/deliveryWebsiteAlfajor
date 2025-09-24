@@ -1,6 +1,6 @@
-const URL_API = 'https://sturdy-waddle-jjjwppqpr4qxfjpg6-3000.app.github.dev/orders';
-const API_GET_QUANTITY = 'https://sturdy-waddle-jjjwppqpr4qxfjpg6-3000.app.github.dev/quantity';
-const API_REMOVE_QUANTITY = 'https://sturdy-waddle-jjjwppqpr4qxfjpg6-3000.app.github.dev/quantity/delete';
+const URL_API = 'http://localhost:3000/orders';
+const API_GET_QUANTITY = 'http://localhost:3000/quantity';
+const API_REMOVE_QUANTITY = 'http://localhost:3000/quantity/delete';
 
 export async function postOrders() {
     try{
